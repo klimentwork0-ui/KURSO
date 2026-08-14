@@ -1,0 +1,139 @@
+/* ============================================
+   KURSO — Mobile Specific
+   ============================================ */
+
+/* Bottom Navigation */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--bottom-nav-height);
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  z-index: var(--z-sticky);
+  padding: 0 var(--space-sm);
+}
+
+.bottom-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-base);
+  min-width: 48px;
+}
+
+.bottom-nav-item:hover,
+.bottom-nav-item.active {
+  color: var(--accent-text);
+}
+
+.bottom-nav-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Floating CTA for mobile */
+.mobile-floating-cta {
+  display: none;
+  position: fixed;
+  bottom: calc(var(--bottom-nav-height) + var(--space-md));
+  left: var(--container-padding);
+  right: var(--container-padding);
+  z-index: var(--z-sticky);
+}
+
+.mobile-floating-cta .btn {
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 767px) {
+  .bottom-nav {
+    display: block;
+  }
+
+  .mobile-floating-cta {
+    display: block;
+  }
+
+  /* Prevent content from being hidden behind bottom nav */
+  .footer {
+    padding-bottom: calc(var(--bottom-nav-height) + 80px);
+  }
+
+  /* Booking card adjustments for mobile */
+  .booking-section .section-header {
+    margin-bottom: var(--space-xl);
+  }
+}
+
+/* Mobile-only "More" menu dropdown */
+.more-menu {
+  display: none;
+  position: fixed;
+  bottom: var(--bottom-nav-height);
+  left: 0;
+  right: 0;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border);
+  padding: var(--space-md);
+  z-index: var(--z-dropdown);
+  animation: slideUp 0.25s ease forwards;
+}
+
+.more-menu.open {
+  display: block;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.more-menu-item {
+  display: block;
+  padding: var(--space-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
+}
+
+.more-menu-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.more-menu-item.active {
+  color: var(--accent-text);
+}
+
+/* Mobile booking step adjustments */
+@media (max-width: 767px) {
+  /* Ensure proper spacing for sticky bottom elements */
+  .page-section {
+    padding-bottom: var(--space-xl);
+  }
+}

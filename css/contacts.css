@@ -1,0 +1,71 @@
+/* ============================================
+   KURSO — Contacts
+   ============================================ */
+
+.contacts-section {
+  padding: var(--space-4xl) 0;
+}
+
+.contacts-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contacts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.contact-item:hover {
+  border-color: var(--border-hover);
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-muted);
+  border-radius: var(--radius-md);
+  font-size: 20px;
+}
+
+.contact-info h4 {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.contact-info p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.contact-info a {
+  color: var(--accent-text);
+  transition: color var(--transition-base);
+}
+
+.contact-info a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.contacts-cta {
+  text-align: center;
+}

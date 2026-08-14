@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KURSO — Admin Panel</title>
+  
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="admin-logo">
+        KURSO <div style="width:6px;height:6px;background:var(--accent);border-radius:50%;"></div>
+        <span style="font-size:12px; font-weight:500; color:var(--text-muted); margin-left:auto;">Admin</span>
+      </div>
+      
+      <nav class="admin-nav">
+        <div class="admin-nav-item active" data-target="rates">
+          Керування курсами
+        </div>
+        <div class="admin-nav-item" data-target="branches">
+          Каси та відділення
+        </div>
+        <div class="admin-nav-item" data-target="bookings">
+          Бронювання
+        </div>
+      </nav>
+      
+      <div class="admin-sidebar-footer">
+        <a href="index.html" class="btn btn-outline btn-block btn-sm">На головний сайт</a>
+      </div>
+    </aside>
+    
+    <!-- MAIN CONTENT -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1 class="admin-title" id="admin-title">Керування курсами</h1>
+      </header>
+      
+      <div class="admin-content">
+        
+        <!-- PANEL: RATES -->
+        <div class="admin-panel active" id="panel-rates">
+          <div style="margin-bottom: var(--space-xl);">
+            <p class="text-secondary">Управління актуальними курсами валют. Всі зміни одразу відображаються на сайті.</p>
+          </div>
+          
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th width="100">Валюта</th>
+                <th>Назва</th>
+                <th width="150">Купівля</th>
+                <th width="150">Продаж</th>
+                <th width="100">Активна</th>
+                <th width="120">Дії</th>
+              </tr>
+            </thead>
+            <tbody id="admin-rates-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- PANEL: BRANCHES -->
+        <div class="admin-panel" id="panel-branches">
+          <div style="margin-bottom: var(--space-xl); display:flex; justify-content:space-between; align-items:center;">
+            <p class="text-secondary">Управління статусами кас, графіком роботи та доступністю для бронювання.</p>
+          </div>
+          
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th width="50">ID</th>
+                <th width="200">Назва</th>
+                <th>Адреса</th>
+                <th width="220">Статус</th>
+                <th width="120">Бронювання</th>
+                <th width="120">Дії</th>
+              </tr>
+            </thead>
+            <tbody id="admin-branches-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- PANEL: BOOKINGS -->
+        <div class="admin-panel" id="panel-bookings">
+          <div class="admin-filters">
+            <select>
+              <option value="all">Всі статуси</option>
+              <option value="pending">Очікує</option>
+              <option value="confirmed">Підтверджено</option>
+              <option value="completed">Виконано</option>
+            </select>
+            <input type="date" placeholder="Дата">
+            <input type="text" placeholder="Пошук за номером або клієнтом" style="flex:1;">
+            <button class="btn btn-secondary">Застосувати</button>
+          </div>
+          
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th width="140">№ Бронювання</th>
+                <th width="120">Дата / Час</th>
+                <th width="160">Клієнт</th>
+                <th width="180">Операція</th>
+                <th>Каса</th>
+                <th width="130">Статус</th>
+                <th width="160">Дії</th>
+              </tr>
+            </thead>
+            <tbody id="admin-bookings-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL: EDIT BRANCH -->
+  <div class="admin-modal" id="modal-edit-branch">
+    <div class="admin-modal-content">
+      <div class="admin-modal-header">
+        <h3 style="font-size:18px;">Редагувати касу</h3>
+        <button class="modal-close" style="font-size:24px; color:var(--text-muted);">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <input type="hidden" id="edit-branch-id">
+        <div class="form-group">
+          <label class="form-label">Назва каси</label>
+          <input type="text" id="edit-branch-name" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Адреса</label>
+          <input type="text" id="edit-branch-address" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Графік роботи</label>
+          <input type="text" id="edit-branch-hours" class="form-input" placeholder="Напр. Пн-Нд 09:00-19:30">
+        </div>
+      </div>
+      <div class="admin-modal-footer">
+        <button class="btn btn-ghost modal-close">Скасувати</button>
+        <button class="btn btn-primary" onclick="KursoAdmin.saveBranchEdit()">Зберегти</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+</html>
