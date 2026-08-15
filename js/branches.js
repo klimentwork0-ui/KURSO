@@ -307,13 +307,23 @@ const KursoBranches = (() => {
     }, 100);
   }
 
+  function showAllBranches(e) {
+    if (e) e.preventDefault();
+    const full = document.getElementById('branches-full');
+    if (full) {
+      full.style.display = 'block';
+      full.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   return {
     init,
     setFilter,
     toggleView,
     toggleMobileMap,
     selectBranch,
-    bookBranch
+    bookBranch,
+    showAllBranches
   };
 
 })();

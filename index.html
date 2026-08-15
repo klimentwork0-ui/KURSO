@@ -2,9 +2,9 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KURSO — Обмін валют у Києві, актуальні курси та бронювання</title>
-  <meta name="description" content="KURSO — обмін валют у Києві. Актуальні курси валют, зручні каси та швидке онлайн-бронювання курсу на 60 хвилин.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>KURSO — Обмін валют у Києві за найкращим курсом</title>
+  <meta name="description" content="KURSO — сервіс готівкового обміну валют у Києві. 21 каса, фіксація курсу на 60 хвилин, онлайн-бронювання.">
   <meta name="keywords" content="обмін валют Київ, курс валют Київ, купити долар Київ, продати долар Київ, обмін євро Київ, бронювання курсу валют, обмін валют поруч">
   <link rel="canonical" href="https://kurso.example/">
 
@@ -19,10 +19,10 @@
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
+  <!-- Design System & Module CSS -->
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/hero.css">
-  <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/booking.css">
   <link rel="stylesheet" href="css/rates.css">
   <link rel="stylesheet" href="css/chart.css">
@@ -43,26 +43,32 @@
         <div class="logo-sub">Currency exchange</div>
       </a>
 
-      <nav class="nav-desktop">
+      <nav class="nav-desktop" aria-label="Основна навігація">
+        <a href="#home" class="nav-link active">Головна</a>
         <a href="#rates" class="nav-link">Курси</a>
         <a href="#branches" class="nav-link">Каси</a>
-        <a href="#about" class="nav-link">Про нас</a>
+        <a href="#about" class="nav-link">Чому KURSO</a>
         <a href="#faq" class="nav-link">FAQ</a>
         <a href="#contacts" class="nav-link">Контакти</a>
       </nav>
 
       <div class="header-right">
-        <div class="header-action">
+        <div class="header-action" aria-label="Місто">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
           Київ
-          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+          <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
         </div>
-        <div class="header-action">
+        <div class="header-action" aria-label="Мова">
           UA
-          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+          <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
         </div>
+        <a href="#booking" class="btn btn-primary header-cta">Забронювати курс</a>
         <button class="burger-btn" id="burger-btn" aria-label="Відкрити меню" aria-expanded="false">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <svg width="24" height="18" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <line x1="0" y1="2" x2="24" y2="2"></line>
+            <line x1="0" y1="9" x2="24" y2="9"></line>
+            <line x1="0" y1="16" x2="24" y2="16"></line>
+          </svg>
         </button>
       </div>
     </div>
@@ -74,13 +80,12 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
     <div class="mobile-menu-inner">
-      <a href="#home" class="mobile-nav-link">Головна</a>
-      <a href="#rates" class="mobile-nav-link">Курси</a>
-      <a href="#chart" class="mobile-nav-link">Графік курсу</a>
-      <a href="#branches" class="mobile-nav-link">Відділення</a>
-      <a href="#about" class="mobile-nav-link">Про KURSO</a>
-      <a href="#faq" class="mobile-nav-link">FAQ</a>
-      <a href="#contacts" class="mobile-nav-link">Контакти</a>
+      <a href="#home" class="mobile-nav-link" onclick="KursoApp.closeMobileMenu()">Головна</a>
+      <a href="#rates" class="mobile-nav-link" onclick="KursoApp.closeMobileMenu()">Курси валют</a>
+      <a href="#branches" class="mobile-nav-link" onclick="KursoApp.closeMobileMenu()">Каси у Києві</a>
+      <a href="#about" class="mobile-nav-link" onclick="KursoApp.closeMobileMenu()">Чому KURSO</a>
+      <a href="#faq" class="mobile-nav-link" onclick="KursoApp.closeMobileMenu()">Поширені питання</a>
+      <a href="#contacts" class="mobile-nav-link" onclick="KursoApp.closeMobileMenu()">Контакти</a>
 
       <a href="#booking" class="btn btn-primary btn-block mobile-menu-cta" onclick="KursoApp.closeMobileMenu()">Забронювати курс →</a>
 
@@ -102,130 +107,138 @@
     <div class="hero-bg"></div>
     <div class="container hero-container">
       <div class="hero-content">
-        <h1 class="hero-title">Обмін валют у Києві<br><span class="text-accent">за найкращим курсом</span></h1>
-        <p class="hero-subtitle">Фіксуйте курс онлайн та обмінюйте<br>у зручній касі без черг</p>
+        <h1 class="hero-title">
+          Обмін валют<br>
+          у Києві<br>
+          <span class="hero-title-accent">за найкращим курсом</span>
+        </h1>
 
-        <div class="hero-features flex gap-6">
-          <div class="feature-item">
-            <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
-            <div class="feature-text">Вигідні<br>курси</div>
+        <div class="hero-bullets">
+          <div class="hero-bullet-item">
+            <div class="hero-bullet-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <div class="hero-bullet-text">Фіксуйте курс на 60 хвилин</div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-            <div class="feature-text">Бронювання<br>за 2 хвилини</div>
+          <div class="hero-bullet-item">
+            <div class="hero-bullet-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div class="hero-bullet-text">21 каса у Києві</div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
-            <div class="feature-text">21 каса<br>у Києві</div>
+          <div class="hero-bullet-item">
+            <div class="hero-bullet-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="hero-bullet-text">Онлайн-бронювання</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================= MAIN GRID (Booking + Rates/Chart) ======================= -->
-  <section class="main-grid-section" id="booking">
-    <div class="container main-grid">
-      
-      <!-- LEFT: Booking Card (Multi-step wizard) -->
-      <div class="card booking-card" id="booking-steps">
+  <!-- ======================= БРОНЮВАННЯ ======================= -->
+  <section class="booking-section" id="booking">
+    <div class="container">
+      <div class="booking-card" id="booking-steps">
         <h2 class="card-title">Забронювати курс</h2>
 
-        <!-- Progress dots -->
         <div class="booking-progress">
           <div class="booking-step-dot active"></div>
           <div class="booking-step-line"></div>
           <div class="booking-step-dot"></div>
           <div class="booking-step-line"></div>
           <div class="booking-step-dot"></div>
+          <div class="booking-step-line"></div>
+          <div class="booking-step-dot"></div>
         </div>
 
-        <!-- STEP 1: Calculator -->
+        <!-- STEP 1: Calculator + Branch & Time Selector -->
         <div class="booking-step active" id="booking-step-1">
-          <div class="form-group">
-            <label class="form-label" for="calc-from-amount">Ви віддаєте</label>
-            <div class="input-group">
-              <input type="text" class="input-field" id="calc-from-amount" inputmode="decimal" value="10 000" autocomplete="off">
-              <div class="currency-select">
-                <select class="calc-currency" id="calc-from-currency" style="background:transparent; color:inherit; font:inherit; border:none; cursor:pointer;" aria-label="Валюта віддаю"></select>
-              </div>
+          <div class="calc-block">
+            <label class="calc-label" for="calc-from-amount">Ви віддаєте</label>
+            <div class="calc-row">
+              <input type="text" class="calc-amount" id="calc-from-amount" inputmode="decimal" value="10 000" autocomplete="off" aria-label="Сума віддаю">
+              <select class="calc-currency" id="calc-from-currency" aria-label="Валюта віддаю"></select>
             </div>
           </div>
 
-          <div class="calc-swap flex justify-center my-2">
+          <div class="calc-swap-row">
             <button type="button" class="calc-swap-btn" id="calc-swap" title="Поміняти місцями" aria-label="Поміняти місцями">⇅</button>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="calc-to-amount">Ви отримуєте</label>
-            <div class="input-group">
-              <input type="text" class="input-field" id="calc-to-amount" readonly tabindex="-1" value="400 000">
-              <div class="currency-select">
-                <select class="calc-currency" id="calc-to-currency" style="background:transparent; color:inherit; font:inherit; border:none; cursor:pointer;" aria-label="Валюта отримую"></select>
-              </div>
+          <div class="calc-block">
+            <label class="calc-label" for="calc-to-amount">Ви отримуєте</label>
+            <div class="calc-row">
+              <input type="text" class="calc-amount" id="calc-to-amount" readonly tabindex="-1" value="400 000" aria-label="Сума отримую">
+              <select class="calc-currency" id="calc-to-currency" aria-label="Валюта отримую"></select>
             </div>
           </div>
 
-          <div class="form-group mt-4">
-            <label class="form-label">Оберіть касу</label>
-            <div class="input-group select-group" onclick="KursoBooking.goToStep2()">
-              <div class="select-value" id="selected-branch-preview">Гната Юри, 20</div>
-              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+          <div class="calc-block">
+            <label class="calc-label" for="calc-branch-select">Оберіть касу</label>
+            <div class="booking-select-row">
+              <span class="booking-select-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </span>
+              <select class="booking-custom-select" id="calc-branch-select" aria-label="Оберіть касу"></select>
             </div>
           </div>
 
-          <div class="form-group mt-4">
-            <label class="form-label">Час візиту</label>
-            <div class="input-group select-group" onclick="KursoBooking.goToStep2()">
-              <div class="select-value flex items-center gap-2">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span id="selected-time-preview">Сьогодні, 18:00</span>
-              </div>
-              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+          <div class="calc-block">
+            <label class="calc-label" for="calc-time-select">Час візиту</label>
+            <div class="booking-select-row">
+              <span class="booking-select-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              </span>
+              <select class="booking-custom-select" id="calc-time-select" aria-label="Час візиту"></select>
             </div>
           </div>
 
-          <div class="calc-rate" id="calc-rate-display" aria-live="polite" style="margin-top:12px; font-size:13px; color:var(--text-secondary);"></div>
-          <div class="calc-limit" id="calc-limit-info" style="font-size:11px; color:var(--text-muted); text-align:center; margin-top:4px;"></div>
+          <div class="calc-rate" id="calc-rate-display" aria-live="polite"></div>
+          <div class="calc-limit" id="calc-limit-info"></div>
           <div class="field-error" id="calc-error" role="alert"></div>
 
-          <button class="btn btn-primary btn-block mt-6" id="booking-continue" onclick="KursoBooking.goToStep2()" style="font-size: 16px;">
-            Забронювати курс 
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          <button class="btn btn-gold-cta btn-block" id="booking-continue" onclick="KursoBooking.goToStep2()">
+            Забронювати курс &nbsp; &rarr;
           </button>
 
-          <div class="lock-info mt-4">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            Курс фіксується на 60 хвилин
+          <div class="booking-guarantee">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span>Ваші дані та угоди під захистом</span>
           </div>
         </div>
 
-        <!-- STEP 2: Branch + Date/Time -->
+        <!-- STEP 2: Branch List + Date / Time Detail -->
         <div class="booking-step" id="booking-step-2">
           <button class="booking-back" onclick="KursoBooking.goBack()">← Назад</button>
-          <h3 class="booking-step-title" style="font-size:18px; font-weight:700; margin-bottom:8px;">Оберіть касу</h3>
-          <p class="booking-step-desc">Оберіть зручну касу KURSO</p>
+          <h3 class="booking-step-title">Оберіть касу</h3>
+          <p class="booking-step-desc">Оберіть зручну касу KURSO у Києві</p>
 
-          <div class="branch-list" id="booking-branch-list" style="max-height:280px; overflow-y:auto; margin-bottom:16px;"></div>
+          <div class="branch-list" id="booking-branch-list"></div>
           <div class="field-error" id="booking-branch-error" role="alert"></div>
 
-          <div class="datetime-section" id="booking-datetime" style="display:none; margin-top:16px; border-top:1px solid var(--border); padding-top:16px;">
-            <h4 style="font-size:15px; font-weight:600; margin-bottom:12px;">Коли приїдете?</h4>
-            <div class="date-picker-row" id="booking-dates" style="display:flex; gap:8px; margin-bottom:12px;"></div>
+          <div class="datetime-section" id="booking-datetime" style="display:none;">
+            <h4>Коли приїдете?</h4>
+            <div class="date-picker-row" id="booking-dates"></div>
             <div class="field-error" id="booking-time-error" role="alert"></div>
-            <div class="time-slots" id="booking-time-slots" style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;"></div>
+            <div class="time-slots" id="booking-time-slots"></div>
+            <div class="other-time-note">
+              Інший час — за попередньою домовленістю:
+              <a href="tel:+380675042228">+380 67 504 22 28</a> · <a href="https://t.me/SabinaJI" target="_blank" rel="noopener">@SabinaJI</a>
+            </div>
           </div>
 
-          <button class="btn btn-primary btn-block mt-6" id="booking-step2-next" onclick="KursoBooking.goToStep3()" style="display:none; font-size:16px;">
-            Продовжити →
+          <button class="btn btn-gold-cta btn-block" id="booking-step2-next" onclick="KursoBooking.goToStep3()" style="display:none;">
+            Продовжити &nbsp; &rarr;
           </button>
         </div>
 
-        <!-- STEP 3: Contact -->
+        <!-- STEP 3: Contact Details -->
         <div class="booking-step" id="booking-step-3">
           <button class="booking-back" onclick="KursoBooking.goBack()">← Назад</button>
-          <h3 class="booking-step-title" style="font-size:18px; font-weight:700; margin-bottom:8px;">Ваші дані</h3>
-          <p class="booking-step-desc">Залиште ім'я та один контакт для підтвердження</p>
+          <h3 class="booking-step-title">Ваші дані</h3>
+          <p class="booking-step-desc">Вкажіть ім'я та контакт для підтвердження броні</p>
 
           <div class="form-group">
             <label class="form-label" for="booking-name">Ім'я</label>
@@ -233,26 +246,26 @@
             <div class="field-error" id="booking-name-error" role="alert"></div>
           </div>
 
-          <div class="form-group mt-4">
+          <div class="form-group">
             <label class="form-label" for="booking-contact">Телефон або Telegram</label>
             <input type="text" class="form-input" id="booking-contact" placeholder="+380 67 000 00 00 або @username" autocomplete="tel">
             <div class="field-error" id="booking-contact-error" role="alert"></div>
           </div>
 
-          <button class="btn btn-primary btn-block mt-6" onclick="KursoBooking.goToStep4()" style="font-size:16px;">
-            Продовжити →
+          <button class="btn btn-gold-cta btn-block" onclick="KursoBooking.goToStep4()">
+            Продовжити &nbsp; &rarr;
           </button>
         </div>
 
         <!-- STEP 4: Summary & Confirm -->
         <div class="booking-step" id="booking-step-4">
           <button class="booking-back" onclick="KursoBooking.goBack()">← Назад</button>
-          <h3 class="booking-step-title" style="font-size:18px; font-weight:700; margin-bottom:8px;">Ваше бронювання</h3>
+          <h3 class="booking-step-title">Ваше бронювання</h3>
           <p class="booking-step-desc">Перевірте деталі перед підтвердженням</p>
 
           <div class="rate-warning" id="rate-warning" role="alert">
             <div class="rate-warning-title">Курс оновився</div>
-            <div class="rate-warning-text">Актуальний курс змінився. Перевірте нову суму перед підтвердженням.</div>
+            <div class="rate-warning-text">Актуальний курс змінився. Перевірте нову суму.</div>
             <button class="btn btn-outline btn-sm" onclick="KursoBooking.refreshRate()">Оновити курс</button>
           </div>
 
@@ -269,392 +282,359 @@
 
           <label class="privacy-consent">
             <input type="checkbox" id="booking-consent">
-            <span>Я погоджуюся з <a href="#" onclick="event.preventDefault(); return false;">політикою обробки персональних даних</a></span>
+            <span>Я погоджуюся з політикою конфіденційності</span>
           </label>
           <div class="field-error" id="booking-consent-error" role="alert"></div>
 
-          <button class="btn btn-primary btn-block" id="booking-submit" onclick="KursoBooking.submitBooking()" style="font-size:16px;">
-            Забронювати курс
+          <button class="btn btn-gold-cta btn-block" id="booking-submit" onclick="KursoBooking.submitBooking()">
+            Забронювати курс &nbsp; &rarr;
           </button>
         </div>
       </div>
 
       <!-- SUCCESS -->
       <div id="booking-success" style="display:none;"></div>
+    </div>
+  </section>
 
-      <!-- RIGHT: Rates & Chart Cards -->
-      <div class="right-col">
-        <!-- Rates Card -->
-        <div class="card rates-card">
-          <div class="card-header flex justify-between items-center mb-4">
-            <h2 class="card-title m-0" style="font-size:20px;">Вигідний курс</h2>
-            <div class="update-status">
-              <div class="status-dot"></div>
-              <span class="rates-updated-time">Оновлено 1 хв тому</span>
-            </div>
+  <!-- ======================= ВИГІДНИЙ КУРС ======================= -->
+  <section class="rates-section" id="rates">
+    <div class="container">
+      <div class="rates-header">
+        <h2 class="section-heading-sm">Вигідний курс</h2>
+        <div class="rates-updated"><span class="rates-updated-time">Оновлено 1 хв тому</span></div>
+      </div>
+
+      <!-- Compact 1:1 Preview Card (USD, EUR top rates) -->
+      <div class="rates-preview-card" id="rates-preview-container">
+        <div class="rates-preview-row" onclick="KursoBooking.startWithCurrency('USD', 'sell')">
+          <div class="rates-curr-group">
+            <div class="flag-circle">🇺🇸</div>
+            <div class="rates-pair"><strong>USD</strong> <span class="text-muted">/ UAH</span></div>
           </div>
-          
-          <div class="rates-tabs flex gap-4 mb-4">
-            <div class="rate-tab active">USD</div>
-            <div class="rate-tab">EUR</div>
-            <div class="rate-tab">PLN</div>
-            <div class="rate-tab">GBP</div>
+          <div class="rates-col-val">
+            <div class="rates-col-label">купівля</div>
+            <div class="rates-val-buy" id="preview-usd-buy">39,50</div>
           </div>
-          
-          <div class="rates-table">
-            <div class="rate-row" style="display:grid; grid-template-columns:1fr 100px 100px; align-items:center; padding:12px 0; border-bottom:1px solid var(--border);">
-              <div class="rate-currency flex items-center gap-2">
-                <span class="flag">🇺🇸</span> <strong>USD</strong> / UAH
-              </div>
-              <div class="rate-val">
-                <div class="rate-label">купівля</div>
-                <div class="rate-num" style="font-size:18px; font-weight:700;">39,50</div>
-              </div>
-              <div class="rate-val">
-                <div class="rate-label">продаж</div>
-                <div class="rate-num text-accent" style="font-size:18px; font-weight:700;">40,00</div>
-              </div>
-            </div>
-            <div class="rate-row" style="display:grid; grid-template-columns:1fr 100px 100px; align-items:center; padding:12px 0;">
-              <div class="rate-currency flex items-center gap-2">
-                <span class="flag">🇪🇺</span> <strong>EUR</strong> / UAH
-              </div>
-              <div class="rate-val">
-                <div class="rate-label">купівля</div>
-                <div class="rate-num" style="font-size:18px; font-weight:700;">43,50</div>
-              </div>
-              <div class="rate-val">
-                <div class="rate-label">продаж</div>
-                <div class="rate-num text-accent" style="font-size:18px; font-weight:700;">44,10</div>
-              </div>
-            </div>
+          <div class="rates-col-val">
+            <div class="rates-col-label">продаж</div>
+            <div class="rates-val-sell" id="preview-usd-sell">40,00</div>
           </div>
-          
-          <a href="#rates" class="view-all-link flex items-center justify-center mt-4">
-            Переглянути всі курси 
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
+          <div class="rates-chevron">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
         </div>
-        
-        <!-- Chart Card -->
-        <div class="card chart-card mt-4">
-          <div class="flex justify-between items-start mb-2">
-            <div>
-              <div class="font-bold text-white">USD / UAH</div>
-              <div class="text-green text-sm" style="color:var(--status-open);">+0,15 (0,38%)</div>
-            </div>
-            <div class="chart-big-rate text-accent font-bold" style="font-size:32px;">40,00</div>
+
+        <div class="rates-preview-row" onclick="KursoBooking.startWithCurrency('EUR', 'sell')">
+          <div class="rates-curr-group">
+            <div class="flag-circle">🇪🇺</div>
+            <div class="rates-pair"><strong>EUR</strong> <span class="text-muted">/ UAH</span></div>
           </div>
-          <div class="chart-wrapper" style="height:120px; margin-top:16px;">
-             <canvas id="mock-chart" width="100%" height="120" aria-label="Міні-графік"></canvas>
-             <div class="chart-labels flex justify-between mt-2 text-xs text-secondary" style="font-size:11px; color:var(--text-secondary); margin-top:8px;">
-               <span>10:00</span>
-               <span>12:00</span>
-               <span>14:00</span>
-               <span>16:00</span>
-               <span>18:00</span>
-             </div>
+          <div class="rates-col-val">
+            <div class="rates-col-label">купівля</div>
+            <div class="rates-val-buy" id="preview-eur-buy">43,50</div>
+          </div>
+          <div class="rates-col-val">
+            <div class="rates-col-label">продаж</div>
+            <div class="rates-val-sell" id="preview-eur-sell">44,10</div>
+          </div>
+          <div class="rates-chevron">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </div>
         </div>
       </div>
 
+      <!-- Expand Link -->
+      <div class="rates-show-more">
+        <button class="rates-view-all-link" id="rates-show-more-btn" onclick="KursoRates.toggleShowMore()">
+          Переглянути всі курси &nbsp; &rarr;
+        </button>
+      </div>
+
+      <!-- Full Desktop Table (expandable) -->
+      <div class="rates-table-wrapper" id="rates-full-table" style="display:none;">
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Валюта</th>
+              <th>Купівля</th>
+              <th>Продаж</th>
+              <th>Бронювання</th>
+            </tr>
+          </thead>
+          <tbody id="rates-table-body"></tbody>
+        </table>
+      </div>
+
+      <h3 class="cross-rates-header" id="cross-rates-header" style="display:none;">Крос-курси</h3>
+      <div class="rates-table-wrapper" id="cross-rates-wrapper">
+        <table class="rates-table">
+          <tbody id="cross-rates-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="rates-mobile">
+        <div id="rates-mobile-container"></div>
+      </div>
     </div>
   </section>
-  
-  <!-- ======================= BENEFITS BLOCK ======================= -->
-  <section class="benefits-section">
+
+  <!-- ======================= НАШІ КАСИ У КИЄВІ ======================= -->
+  <section class="branches-section" id="branches">
     <div class="container">
-      <div class="benefits-grid">
-        <div class="benefit-card">
+      <div class="branches-header">
+        <h2 class="section-heading-sm">Наші каси у Києві</h2>
+        <a href="#branches-full" class="section-link-gold" onclick="KursoBranches.showAllBranches(event)">Всі 21 каса &nbsp; &rarr;</a>
+      </div>
+
+      <!-- Preview Cards (4 cards matching screenshot 1:1) -->
+      <div class="branches-preview-grid">
+        <div class="branch-preview-card" onclick="KursoBranches.bookBranch(16)">
+          <div class="branch-badge-nearest">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Найближча
+          </div>
+          <div class="branch-preview-name">Гната Юри, 20</div>
+          <div class="branch-preview-dist">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-muted"><circle cx="12" cy="5" r="2"></circle><path d="M10 22v-5l-2-3 3-3 2 3v5"></path></svg>
+            2 хв
+          </div>
+          <div class="branch-preview-hours">працює до 20:00</div>
+        </div>
+
+        <div class="branch-preview-card" onclick="KursoBranches.bookBranch(1)">
+          <div class="branch-preview-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div class="branch-preview-name">Хрещатик, 38</div>
+          <div class="branch-preview-dist">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-muted"><circle cx="12" cy="5" r="2"></circle><path d="M10 22v-5l-2-3 3-3 2 3v5"></path></svg>
+            5 хв
+          </div>
+          <div class="branch-preview-hours">працює до 21:00</div>
+        </div>
+
+        <div class="branch-preview-card" onclick="KursoBranches.bookBranch(10)">
+          <div class="branch-preview-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div class="branch-preview-name">Оболонський просп., 1</div>
+          <div class="branch-preview-dist">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-muted"><circle cx="12" cy="5" r="2"></circle><path d="M10 22v-5l-2-3 3-3 2 3v5"></path></svg>
+            7 хв
+          </div>
+          <div class="branch-preview-hours">працює до 20:00</div>
+        </div>
+
+        <div class="branch-preview-card" onclick="KursoBranches.bookBranch(6)">
+          <div class="branch-preview-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div class="branch-preview-name">Велика Васильківська, 72</div>
+          <div class="branch-preview-dist">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-muted"><circle cx="12" cy="5" r="2"></circle><path d="M10 22v-5l-2-3 3-3 2 3v5"></path></svg>
+            8 хв
+          </div>
+          <div class="branch-preview-hours">працює до 20:30</div>
+        </div>
+      </div>
+
+      <!-- Full Interactive Branches (List + Map) -->
+      <div id="branches-full" class="branches-full-container">
+        <div class="branches-filters">
+          <div class="branches-filter-tabs">
+            <button class="branch-filter-btn active" onclick="KursoBranches.setFilter('all', this)">Всі</button>
+            <button class="branch-filter-btn" onclick="KursoBranches.setFilter('open', this)">Відчинені</button>
+          </div>
+          <div class="branches-search">
+            <span class="branches-search-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input type="text" id="branches-search-input" placeholder="Пошук за адресою або назвою" aria-label="Пошук каси">
+          </div>
+          <div class="branches-view-toggle">
+            <button class="view-toggle-btn active" onclick="KursoBranches.toggleView('list', this)">Список</button>
+            <button class="view-toggle-btn" onclick="KursoBranches.toggleView('map', this)">Карта</button>
+          </div>
+        </div>
+
+        <button class="btn btn-outline btn-block mobile-map-toggle" id="mobile-map-toggle-btn" data-view="list" onclick="KursoBranches.toggleMobileMap()">
+          Показати карту
+        </button>
+
+        <div class="branches-layout" id="branches-layout">
+          <div class="branches-list-container">
+            <div class="branches-count" id="branches-count"></div>
+            <div class="branches-list" id="branches-list"></div>
+          </div>
+          <div class="branches-map-container">
+            <div id="branches-map"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ЧОМУ ОБИРАЮТЬ KURSO ======================= -->
+  <section class="benefits-section" id="about">
+    <div class="container">
+      <h2 class="section-heading-sm mb-4">Чому обирають KURSO</h2>
+      <div class="benefits-card">
+        <div class="benefit-item">
           <div class="benefit-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
           </div>
-          <div class="benefit-title">Надійно</div>
-          <div class="benefit-desc">Ваші кошти під<br>захистом</div>
+          <div class="benefit-info">
+            <div class="benefit-title">Безпечно</div>
+            <div class="benefit-desc">Ваші дані та угоди під захистом</div>
+          </div>
         </div>
-        <div class="benefit-card">
+
+        <div class="benefit-item">
           <div class="benefit-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
           </div>
-          <div class="benefit-title">Швидко</div>
-          <div class="benefit-desc">Обмін за кілька<br>хвилин</div>
+          <div class="benefit-info">
+            <div class="benefit-title">Швидко</div>
+            <div class="benefit-desc">Бронювання за 2 хвилини</div>
+          </div>
         </div>
-        <div class="benefit-card">
+
+        <div class="benefit-item">
           <div class="benefit-icon">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><circle cx="7.5" cy="7.5" r="2.5"></circle><circle cx="16.5" cy="16.5" r="2.5"></circle><line x1="6" y1="18" x2="18" y2="6"></line></svg>
           </div>
-          <div class="benefit-title">Зручно</div>
-          <div class="benefit-desc">21 каса в усіх районах<br>Києва</div>
+          <div class="benefit-info">
+            <div class="benefit-title">Вигідно</div>
+            <div class="benefit-desc">Найкращі курси у Києві</div>
+          </div>
         </div>
-        <div class="benefit-card">
+
+        <div class="benefit-item">
           <div class="benefit-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="10" y2="17"></line></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
           </div>
-          <div class="benefit-title">Прозоро</div>
-          <div class="benefit-desc">Актуальні курси<br>в режимі реального часу</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- ======================= BRANCHES BLOCK ======================= -->
-  <section class="branches-section" id="branches">
-    <div class="container">
-      <div class="section-header flex justify-between items-center mb-6" style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 class="section-title text-2xl font-bold" style="font-size:24px; font-weight:700; margin:0;">21 каса у Києві</h2>
-        <a href="#branches" class="view-all-link flex items-center gap-2">
-          Переглянути всі каси
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
-      </div>
-      
-      <div class="branches-grid">
-        <div class="branches-list" id="branches-list">
-          <!-- Active Card -->
-          <div class="branch-card active">
-            <div class="flex justify-between items-start" style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div class="flex gap-3" style="display:flex; gap:12px;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold mt-1" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <div>
-                  <div class="font-bold text-lg" style="font-weight:700; font-size:16px;">Гната Юри, 20</div>
-                  <div class="branch-status mt-1" style="font-size:13px; color:var(--text-secondary); margin-top:4px;">
-                    <span class="status-dot-green"></span> Відкрита · 09:00 - 21:00
-                  </div>
-                </div>
-              </div>
-              <div class="text-accent text-sm font-semibold" style="color:var(--accent); font-size:14px; font-weight:600;">400 м</div>
-            </div>
+          <div class="benefit-info">
+            <div class="benefit-title">Зручно</div>
+            <div class="benefit-desc">21 каса поруч з вами</div>
           </div>
-          
-          <div class="branch-card">
-            <div class="flex justify-between items-start" style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div class="flex gap-3" style="display:flex; gap:12px;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary mt-1" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <div>
-                  <div class="font-semibold" style="font-weight:600; font-size:16px;">Срібнокільська, 1</div>
-                  <div class="branch-status mt-1" style="font-size:13px; color:var(--text-secondary); margin-top:4px;">
-                    <span class="status-dot-green"></span> Відкрита · 09:00 - 21:00
-                  </div>
-                </div>
-              </div>
-              <div class="text-secondary text-sm" style="color:var(--text-secondary); font-size:14px;">1,2 км</div>
-            </div>
-          </div>
-          
-          <div class="branch-card">
-            <div class="flex justify-between items-start" style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div class="flex gap-3" style="display:flex; gap:12px;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary mt-1" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <div>
-                  <div class="font-semibold" style="font-weight:600; font-size:16px;">Велика Васильківська, 72</div>
-                  <div class="branch-status mt-1" style="font-size:13px; color:var(--text-secondary); margin-top:4px;">
-                    <span class="status-dot-green"></span> Відкрита · 09:00 - 21:00
-                  </div>
-                </div>
-              </div>
-              <div class="text-secondary text-sm" style="color:var(--text-secondary); font-size:14px;">2,4 км</div>
-            </div>
-          </div>
-          
-          <div class="branch-card">
-            <div class="flex justify-between items-start" style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div class="flex gap-3" style="display:flex; gap:12px;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary mt-1" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <div>
-                  <div class="font-semibold" style="font-weight:600; font-size:16px;">Хрещатик, 27</div>
-                  <div class="branch-status mt-1" style="font-size:13px; color:var(--text-secondary); margin-top:4px;">
-                    <span class="status-dot-green"></span> Відкрита · 09:00 - 21:00
-                  </div>
-                </div>
-              </div>
-              <div class="text-secondary text-sm" style="color:var(--text-secondary); font-size:14px;">3,1 км</div>
-            </div>
-          </div>
-          
-          <button class="btn btn-block show-map-btn mt-2" onclick="KursoBranches.toggleView('map', this)">
-            Показати на карті
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </button>
-        </div>
-        
-        <div class="branches-map">
-          <div class="map-bg"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================= FAQ ======================= -->
+  <!-- ======================= ПОШИРЕНІ ПИТАННЯ ======================= -->
   <section class="faq-section" id="faq">
     <div class="container">
-      <div class="section-header flex justify-between items-center mb-6" style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 class="section-title text-2xl font-bold" style="font-size:24px; font-weight:700; margin:0;">Часті питання</h2>
-        <a href="#faq" class="view-all-link flex items-center gap-2">
-          Переглянути всі
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
+      <div class="faq-header">
+        <h2 class="section-heading-sm">Поширені питання</h2>
+        <a href="#faq-list-container" class="section-link-gold">Всі питання &nbsp; &rarr;</a>
       </div>
-      
-      <div class="faq-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px;">
-        <div class="faq-item" style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px 24px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="KursoFAQ.toggle(0)">
-          <div class="flex items-center gap-3" style="display:flex; align-items:center; gap:12px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            <span class="font-medium" style="font-weight:600; font-size:15px;">Як працює бронювання курсу?</span>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-        </div>
-        <div class="faq-item" style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px 24px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="KursoFAQ.toggle(1)">
-          <div class="flex items-center gap-3" style="display:flex; align-items:center; gap:12px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            <span class="font-medium" style="font-weight:600; font-size:15px;">Скільки діє заброньований курс?</span>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-        </div>
-        <div class="faq-item" style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px 24px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="KursoFAQ.toggle(2)">
-          <div class="flex items-center gap-3" style="display:flex; align-items:center; gap:12px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            <span class="font-medium" style="font-weight:600; font-size:15px;">Які документи потрібні?</span>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-        </div>
-        <div class="faq-item" style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px 24px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="KursoFAQ.toggle(3)">
-          <div class="flex items-center gap-3" style="display:flex; align-items:center; gap:12px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            <span class="font-medium" style="font-weight:600; font-size:15px;">Чи можна обміняти велику суму?</span>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary"><path d="M6 9l6 6 6-6"></path></svg>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- ======================= SUBSCRIBE BANNER ======================= -->
-  <section class="subscribe-section">
-    <div class="container">
-      <div class="subscribe-card">
-        <div class="subscribe-content">
-          <h2>Слідкуйте за курсами<br>разом з <span class="text-accent">KURSO</span></h2>
-          <p>Отримуйте сповіщення про вигідні курси</p>
-          <a href="#booking" class="btn btn-primary" style="margin-top: 16px;">
-            Підписатися на сповіщення
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </div>
-        <div class="subscribe-image"></div>
+      <div class="faq-list">
+        <div id="faq-list-container"></div>
       </div>
     </div>
   </section>
 
-  <!-- ======================= ADDITIONAL TABS SECTIONS (Rates, Chart, Branches, FAQ, Contacts) ======================= -->
-  <div style="display:none;">
-    <section id="rates"></section>
-    <section id="chart"></section>
-    <section id="about"></section>
-    <section id="contacts"></section>
-  </div>
+  <!-- ======================= ГРАФІК КУРСУ (MODAL / EXPANDABLE) ======================= -->
+  <section class="chart-section" id="chart" style="display:none;">
+    <div class="container">
+      <div class="section-header left">
+        <h2>Графік курсу</h2>
+        <p class="section-desc">Динаміка валютного курсу</p>
+      </div>
+
+      <div class="chart-controls">
+        <div class="chart-pair-selector">
+          <label for="chart-currency-from">Віддаю</label>
+          <select class="chart-pair-select" id="chart-currency-from"></select>
+          <label for="chart-currency-to">Отримую</label>
+          <select class="chart-pair-select" id="chart-currency-to"></select>
+        </div>
+
+        <div class="chart-periods" role="tablist" aria-label="Період графіка">
+          <button class="chart-period-btn" data-period="1D" onclick="KursoChart.setPeriod('1D', this)">1Д</button>
+          <button class="chart-period-btn" data-period="1W" onclick="KursoChart.setPeriod('1W', this)">1Т</button>
+          <button class="chart-period-btn active" data-period="1M" onclick="KursoChart.setPeriod('1M', this)">1М</button>
+          <button class="chart-period-btn" data-period="3M" onclick="KursoChart.setPeriod('3M', this)">3М</button>
+          <button class="chart-period-btn" data-period="1Y" onclick="KursoChart.setPeriod('1Y', this)">1Р</button>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <div class="chart-canvas-wrapper">
+          <canvas id="kurso-chart" aria-label="Графік курсу"></canvas>
+        </div>
+      </div>
+      <div class="chart-updated" id="chart-updated-time"></div>
+    </div>
+  </section>
 
   <!-- ======================= FOOTER ======================= -->
-  <footer class="footer">
+  <footer class="footer" id="contacts">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo-main mb-1" style="margin-bottom:4px;">KURSO</div>
-          <div class="logo-sub mb-4" style="margin-bottom:16px;">Currency exchange</div>
-          <p class="footer-desc">Обмін валют у Києві<br>за найкращим курсом</p>
-          <div class="social-icons flex gap-3 mt-4" style="display:flex; gap:12px; margin-top:16px;">
-            <a href="https://t.me/SabinaJI" target="_blank" rel="noopener" class="social-icon" aria-label="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-            <a href="#" class="social-icon" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-            <a href="#" class="social-icon" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <div class="logo-main">KURSO</div>
+          <div class="logo-sub mb-2">Currency exchange</div>
+          <div class="footer-tagline">Найкращий курс в обмінних касах Києва</div>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Компанія</div>
+          <div class="footer-links">
+            <a class="footer-link" href="#about">Про нас</a>
+            <a class="footer-link" href="#branches">Каси</a>
+            <a class="footer-link" href="#faq">Питання та відповіді</a>
+            <a class="footer-link" href="#contacts">Контакти</a>
           </div>
         </div>
-        
-        <div class="footer-links">
-          <h4>Меню</h4>
-          <ul>
-            <li><a href="#rates">Курси</a></li>
-            <li><a href="#branches">Каси</a></li>
-            <li><a href="#about">Про нас</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contacts">Контакти</a></li>
-          </ul>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Клієнтам</div>
+          <div class="footer-links">
+            <a class="footer-link" href="#rates">Курси валют</a>
+            <a class="footer-link" href="#booking">Бронювання</a>
+            <a class="footer-link" href="#" onclick="event.preventDefault();">Умови використання</a>
+            <a class="footer-link" href="#" onclick="event.preventDefault();">Політика конфіденційності</a>
+          </div>
         </div>
-        
-        <div class="footer-contacts">
-          <h4>Контакти</h4>
-          <ul>
-            <li class="flex items-center gap-2" style="display:flex; align-items:center; gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +380 44 123 45 67</li>
-            <li class="flex items-center gap-2" style="display:flex; align-items:center; gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Пн-Нд 09:00 - 21:00</li>
-            <li class="flex items-center gap-2" style="display:flex; align-items:center; gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Київ, Україна</li>
-          </ul>
-        </div>
-        
-        <div class="footer-app">
-          <h4>Мобільний застосунок</h4>
-          <div class="flex flex-col gap-2" style="display:flex; flex-direction:column; gap:8px;">
-            <button class="app-btn" onclick="return false;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.32 12.636c-.02 1.637 1.436 2.193 1.455 2.2-1.2 1.758-2.453 1.727-3.037 1.727-1.34 0-2.274-.91-3.674-.91-1.38 0-2.433.89-3.633.91-1.597.02-3.023-1.635-3.844-2.822-1.68-2.433-2.96-6.86-1.24-9.845C2.186 4.397 3.652 3.5 5.176 3.5c1.32 0 2.535.91 3.255.91.74 0 2.155-.91 3.755-.91 1.7 0 3.21.708 4.15 1.83-3.32 1.81-2.86 6.326.304 7.606zM11.95 2c.76-.92 1.93-1.54 3.01-1.54.12 1.25-.37 2.45-1.12 3.36-.72.87-1.92 1.54-3.05 1.54-.14-1.28.43-2.48 1.16-3.36z"/></svg>
-              <div class="text-left">
-                <div class="text-xs text-secondary">Завантажити в</div>
-                <div class="font-bold">App Store</div>
-              </div>
-            </button>
-            <button class="app-btn" onclick="return false;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.23 2.128c-.287.306-.45.753-.45 1.306v17.132c0 .553.163.998.45 1.306L3.3 21.94l9.53-9.53V11.59l-9.53-9.53-.07.068zm12.56 12.56-2.58-2.58v-.216l2.58-2.58L19.43 11.4c.67.38.67 1.01 0 1.39l-3.64 1.898zM15.4 15.08 4.25 21.61c-.34.19-.69.23-1.02.13L15.4 15.08zM15.4 8.92 3.23 2.26C3.56 2.16 3.91 2.2 4.25 2.39L15.4 8.92z"/></svg>
-              <div class="text-left">
-                <div class="text-xs text-secondary">Завантажити в</div>
-                <div class="font-bold">Google Play</div>
-              </div>
-            </button>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Контакти</div>
+          <div class="footer-contacts-list">
+            <a class="footer-contact-item" href="tel:+380675042228">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>+380 67 504 22 28</span>
+            </a>
+            <a class="footer-contact-item" href="https://t.me/SabinaJI" target="_blank" rel="noopener">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              <span>@SabinaJI</span>
+            </a>
+            <div class="footer-contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-gold"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>Щодня 09:00 – 19:30</span>
+            </div>
           </div>
         </div>
       </div>
-      
-      <div class="footer-bottom flex justify-between items-center text-xs text-secondary mt-8 pt-6 border-t border-[#1E2333]">
-        <div>© 2026 KURSO. Усі права захищено</div>
-        <div class="flex gap-4">
-          <a href="#" onclick="return false;">Політика конфіденційності</a>
-          <a href="#" onclick="return false;">Умови користування</a>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 KURSO. Всі права захищені</div>
+        <div class="footer-social-icons">
+          <a href="#" class="footer-social-circle" aria-label="Instagram" onclick="event.preventDefault();">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://t.me/SabinaJI" target="_blank" rel="noopener" class="footer-social-circle" aria-label="Telegram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </a>
+          <a href="#" class="footer-social-circle" aria-label="Facebook" onclick="event.preventDefault();">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
         </div>
       </div>
     </div>
   </footer>
-
-  <!-- ======================= MOBILE BOTTOM NAV ======================= -->
-  <nav class="bottom-nav" aria-label="Мобільна навігація">
-    <div class="bottom-nav-inner">
-      <a href="#home" class="bottom-nav-item active">
-        <span class="bottom-nav-icon">🏠</span>
-        Головна
-      </a>
-      <a href="#rates" class="bottom-nav-item">
-        <span class="bottom-nav-icon">💱</span>
-        Курси
-      </a>
-      <a href="#chart" class="bottom-nav-item">
-        <span class="bottom-nav-icon">📈</span>
-        Графік
-      </a>
-      <a href="#branches" class="bottom-nav-item">
-        <span class="bottom-nav-icon">📍</span>
-        Відділення
-      </a>
-      <a href="#" class="bottom-nav-item" id="bottom-nav-more">
-        <span class="bottom-nav-icon">⋯</span>
-        Ще
-      </a>
-    </div>
-  </nav>
-
-  <div class="more-menu" id="mobile-more-menu">
-    <a href="#about" class="more-menu-item">Про KURSO</a>
-    <a href="#faq" class="more-menu-item">FAQ</a>
-    <a href="#contacts" class="more-menu-item">Контакти</a>
-    <a href="#booking" class="btn btn-primary btn-block more-menu-item" style="margin-top:8px; color:var(--text-inverse);" onclick="KursoApp.closeMobileMenu()">Забронювати курс</a>
-  </div>
-
-  <div class="mobile-floating-cta">
-    <a href="#booking" class="btn btn-primary">Забронювати курс</a>
-  </div>
 
   <!-- ======================= SCRIPTS ======================= -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -669,40 +649,5 @@
   <script src="js/chart.js"></script>
   <script src="js/app.js"></script>
 
-  <script>
-    // Initialize mini mock chart for 1:1 reference match
-    const chartCtx = document.getElementById('mock-chart')?.getContext('2d');
-    if (chartCtx) {
-      const gradient = chartCtx.createLinearGradient(0, 0, 0, 100);
-      gradient.addColorStop(0, 'rgba(228, 181, 81, 0.25)');
-      gradient.addColorStop(1, 'rgba(228, 181, 81, 0)');
-      
-      new Chart(chartCtx, {
-        type: 'line',
-        data: {
-          labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
-          datasets: [{
-            data: [39.5, 39.6, 39.4, 39.5, 39.7, 39.6, 39.8, 39.9, 40.0],
-            borderColor: '#E4B551',
-            borderWidth: 2,
-            backgroundColor: gradient,
-            fill: true,
-            pointRadius: 0,
-            pointHoverRadius: 4,
-            tension: 0.4
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false }, tooltip: { enabled: false } },
-          scales: {
-            x: { display: false },
-            y: { display: false, min: 39.0 }
-          }
-        }
-      });
-    }
-  </script>
 </body>
 </html>

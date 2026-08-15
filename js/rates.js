@@ -18,6 +18,22 @@ const KursoRates = (() => {
     const rates = KursoData.getRates();
     const crossRates = KursoData.getCrossRates();
 
+    // Update preview row values
+    const usd = rates.find(r => r.code === 'USD');
+    const eur = rates.find(r => r.code === 'EUR');
+    const usdBuyEl = document.getElementById('preview-usd-buy');
+    const usdSellEl = document.getElementById('preview-usd-sell');
+    const eurBuyEl = document.getElementById('preview-eur-buy');
+    const eurSellEl = document.getElementById('preview-eur-sell');
+    if (usd) {
+      if (usdBuyEl) usdBuyEl.textContent = KursoUtils.formatRate(usd.buy);
+      if (usdSellEl) usdSellEl.textContent = KursoUtils.formatRate(usd.sell);
+    }
+    if (eur) {
+      if (eurBuyEl) eurBuyEl.textContent = KursoUtils.formatRate(eur.buy);
+      if (eurSellEl) eurSellEl.textContent = KursoUtils.formatRate(eur.sell);
+    }
+
     // Render main rates
     tbody.innerHTML = rates.map((r, i) => `
       <tr class="${i >= 5 ? 'rates-hidden' : ''}">
@@ -103,13 +119,15 @@ const KursoRates = (() => {
 
     const hiddenRows = document.querySelectorAll('.rates-hidden');
     const hiddenCards = document.querySelectorAll('.hidden-card');
+    const fullTable = document.getElementById('rates-full-table');
     
     let isExpanded = btn.classList.contains('expanded');
     
     if (isExpanded) {
       hiddenRows.forEach(el => el.classList.remove('visible'));
       hiddenCards.forEach(el => el.classList.remove('visible'));
-      btn.innerHTML = 'Показати ще &darr;';
+      if (fullTable) fullTable.style.display = 'none';
+      btn.innerHTML = 'Переглянути всі курси &nbsp; &rarr;';
       btn.classList.remove('expanded');
       
       const crossRatesHeader = document.getElementById('cross-rates-header');
@@ -117,6 +135,7 @@ const KursoRates = (() => {
     } else {
       hiddenRows.forEach(el => el.classList.add('visible'));
       hiddenCards.forEach(el => el.classList.add('visible'));
+      if (fullTable) fullTable.style.display = 'block';
       btn.innerHTML = 'Сховати &uarr;';
       btn.classList.add('expanded');
       

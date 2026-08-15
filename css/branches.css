@@ -1,17 +1,109 @@
 /* ============================================
-   KURSO — Branches / Каси
+   KURSO — Branches / Каси (1:1 UI Match)
    ============================================ */
 
 .branches-section {
-  padding: var(--space-4xl) 0;
+  padding: 40px 0;
 }
 
-/* Filters */
+.branches-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+/* 4 Preview Cards Carousel / Grid */
+.branches-preview-grid {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.branches-preview-grid::-webkit-scrollbar {
+  height: 4px;
+}
+
+.branches-preview-grid::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.branch-preview-card {
+  flex: 0 0 200px;
+  scroll-snap-align: start;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.branch-preview-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.branch-badge-nearest {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(228, 181, 81, 0.15);
+  border: 1px solid rgba(228, 181, 81, 0.35);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  width: fit-content;
+  margin-bottom: 2px;
+}
+
+.branch-preview-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.branch-preview-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.branch-preview-dist {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.branch-preview-hours {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Full Interactive Branches Section */
+.branches-full-container {
+  margin-top: 24px;
+}
+
 .branches-filters {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
   flex-wrap: wrap;
 }
 
@@ -45,7 +137,6 @@
 .branches-search {
   flex: 1;
   min-width: 200px;
-  max-width: 300px;
   position: relative;
 }
 
@@ -55,7 +146,6 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
-  font-size: 14px;
   pointer-events: none;
 }
 
@@ -67,19 +157,8 @@
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
   color: var(--text-primary);
-  transition: all var(--transition-base);
 }
 
-.branches-search input:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px var(--accent-muted);
-}
-
-.branches-search input::placeholder {
-  color: var(--text-muted);
-}
-
-/* View toggle */
 .branches-view-toggle {
   display: flex;
   gap: 4px;
@@ -96,11 +175,6 @@
   font-weight: 500;
   color: var(--text-muted);
   border-radius: var(--radius-sm);
-  transition: all var(--transition-base);
-}
-
-.view-toggle-btn:hover {
-  color: var(--text-primary);
 }
 
 .view-toggle-btn.active {
@@ -108,257 +182,131 @@
   color: var(--accent-text);
 }
 
-/* Count */
-.branches-count {
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-  margin-bottom: var(--space-lg);
+.mobile-map-toggle {
+  display: none;
+  margin-bottom: var(--space-md);
 }
 
-.branches-count strong {
-  color: var(--accent-text);
-}
-
-/* Layout */
 .branches-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-lg);
-  min-height: 500px;
+  height: 480px;
 }
 
-.branches-layout.map-hidden {
-  grid-template-columns: 1fr;
-}
-
-/* Branch List */
 .branches-list-container {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
-  max-height: 600px;
-  overflow-y: auto;
-  padding-right: var(--space-sm);
+  overflow: hidden;
 }
 
-/* Branch Card */
+.branches-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.branches-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  overflow-y: auto;
+  padding-right: 6px;
+  flex: 1;
+}
+
 .branch-card {
+  padding: 14px 16px;
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  transition: all var(--transition-base);
   cursor: pointer;
+  transition: all var(--transition-base);
 }
 
 .branch-card:hover {
   border-color: var(--border-hover);
-  background: var(--bg-elevated);
 }
 
 .branch-card.active {
   border-color: var(--accent);
-  box-shadow: var(--shadow-glow);
+  background: var(--accent-muted);
 }
 
 .branch-card-top {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+  align-items: flex-start;
   gap: var(--space-md);
-  margin-bottom: var(--space-md);
 }
 
 .branch-card-name {
   font-weight: 600;
-  font-size: var(--font-size-base);
-  margin-bottom: 4px;
+  font-size: var(--font-size-sm);
+  margin-bottom: 2px;
 }
 
 .branch-card-address {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  line-height: 1.5;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-bottom: 4px;
 }
 
 .branch-card-hours {
-  font-size: var(--font-size-xs);
-  color: var(--text-muted);
-  margin-top: var(--space-sm);
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
 }
 
 .branch-card-actions {
   display: flex;
   gap: var(--space-sm);
   margin-top: var(--space-md);
-  padding-top: var(--space-md);
+  padding-top: var(--space-sm);
   border-top: 1px solid var(--border);
 }
 
-.branch-card-actions .btn {
-  flex: 1;
-}
-
-/* Map */
 .branches-map-container {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border);
-  background: var(--bg-surface);
-  min-height: 500px;
-  position: relative;
+  height: 100%;
 }
 
 #branches-map {
   width: 100%;
   height: 100%;
-  min-height: 500px;
 }
 
-/* Leaflet overrides for dark theme */
-.leaflet-tile-pane {
-  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
-}
-
-.leaflet-popup-content-wrapper {
-  background: var(--bg-elevated) !important;
-  color: var(--text-primary) !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: var(--shadow-lg) !important;
-  border: 1px solid var(--border) !important;
-}
-
-.leaflet-popup-tip {
-  background: var(--bg-elevated) !important;
-  border: 1px solid var(--border) !important;
-}
-
-.leaflet-popup-content {
-  margin: var(--space-md) !important;
-  font-family: var(--font-family) !important;
-  font-size: var(--font-size-sm) !important;
-  line-height: 1.5 !important;
-}
-
-.leaflet-popup-close-button {
-  color: var(--text-muted) !important;
-}
-
-.leaflet-control-zoom {
-  border: 1px solid var(--border) !important;
-  border-radius: var(--radius-sm) !important;
-  overflow: hidden;
-}
-
-.leaflet-control-zoom a {
-  background: var(--bg-elevated) !important;
-  color: var(--text-primary) !important;
-  border-color: var(--border) !important;
-}
-
-.leaflet-control-zoom a:hover {
-  background: var(--bg-hover) !important;
-}
-
-.leaflet-control-attribution {
-  background: rgba(13, 15, 20, 0.8) !important;
-  color: var(--text-muted) !important;
-  font-size: 10px !important;
-}
-
-.leaflet-control-attribution a {
-  color: var(--text-muted) !important;
-}
-
-/* Map popup content */
-.map-popup-name {
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.map-popup-address {
-  color: var(--text-secondary);
-  font-size: var(--font-size-xs);
-  margin-bottom: var(--space-sm);
-}
-
-.map-popup-btn {
-  display: inline-block;
-  padding: 6px 14px;
-  background: var(--accent);
-  color: var(--text-inverse);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  margin-top: 4px;
-}
-
-/* Mobile map toggle */
-.mobile-map-toggle {
-  display: none;
-  margin-bottom: var(--space-md);
-}
-
-/* Empty state */
-.branches-empty {
-  text-align: center;
-  padding: var(--space-3xl);
-  color: var(--text-muted);
-}
-
-.branches-empty-icon {
-  font-size: 40px;
-  margin-bottom: var(--space-md);
+@media (min-width: 992px) {
+  .branches-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: visible;
+  }
+  .branch-preview-card {
+    flex: auto;
+  }
 }
 
 @media (max-width: 767px) {
   .branches-layout {
     grid-template-columns: 1fr;
+    height: auto;
   }
-
   .branches-map-container {
+    height: 300px;
     display: none;
   }
-
   .branches-map-container.visible {
     display: block;
-    min-height: 350px;
   }
-
   .mobile-map-toggle {
     display: block;
   }
-
-  .branches-filters {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .branches-search {
-    max-width: 100%;
-  }
-
   .branches-view-toggle {
-    margin-left: 0;
-  }
-
-  .branches-list-container {
-    max-height: none;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1199px) {
-  .branches-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .branches-map-container {
-    min-height: 400px;
-    order: -1;
+    display: none;
   }
 }

@@ -38,15 +38,71 @@ const KursoBooking = (() => {
     // "From" currencies: all active + UAH
     fromSelect.innerHTML = '';
     rates.forEach(r => {
-      fromSelect.innerHTML += `<option value="${r.code}" ${r.code === bookingData.currencyFrom ? 'selected' : ''}>${r.code}</option>`;
+      fromSelect.innerHTML += `<option value="${r.code}" ${r.code === bookingData.currencyFrom ? 'selected' : ''}>${r.flag} ${r.code}</option>`;
     });
-    fromSelect.innerHTML += `<option value="UAH" ${bookingData.currencyFrom === 'UAH' ? 'selected' : ''}>UAH</option>`;
+    fromSelect.innerHTML += `<option value="UAH" ${bookingData.currencyFrom === 'UAH' ? 'selected' : ''}>🇺🇦 UAH</option>`;
 
     // "To" currencies: UAH + all active
-    toSelect.innerHTML = `<option value="UAH" ${bookingData.currencyTo === 'UAH' ? 'selected' : ''}>UAH</option>`;
+    toSelect.innerHTML = `<option value="UAH" ${bookingData.currencyTo === 'UAH' ? 'selected' : ''}>🇺🇦 UAH</option>`;
     rates.forEach(r => {
-      toSelect.innerHTML += `<option value="${r.code}" ${r.code === bookingData.currencyTo ? 'selected' : ''}>${r.code}</option>`;
+      toSelect.innerHTML += `<option value="${r.code}" ${r.code === bookingData.currencyTo ? 'selected' : ''}>${r.flag} ${r.code}</option>`;
     });
+
+    // Populate branch select if present in step 1
+    const branchSelect = document.getElementById('calc-branch-select');
+    if (branchSelect) {
+      const branches = KursoData.getBranches();
+      branchSelect.innerHTML = branches.map(b => {
+        const shortName = b.name.replace(/^Каса №\d+\s+/, '');
+        return `<option value="${b.id}" ${bookingData.branchId === b.id ? 'selected' : ''}>${shortName}</option>`;
+      }).join('');
+
+      if (!bookingData.branchId && branches.length > 0) {
+        // default to branch #16 (Гната Юри, 20) or first
+        const defaultBranch = branches.find(b => b.name.includes('Гната Юри')) || branches[0];
+        bookingData.branchId = defaultBranch.id;
+        bookingData.branchName = defaultBranch.name;
+        bookingData.branchAddress = defaultBranch.address;
+        branchSelect.value = String(defaultBranch.id);
+      }
+
+      branchSelect.addEventListener('change', (e) => {
+        const id = parseInt(e.target.value);
+        const b = KursoData.getBranch(id);
+        if (b) {
+          bookingData.branchId = b.id;
+          bookingData.branchName = b.name;
+          bookingData.branchAddress = b.address;
+        }
+      });
+    }
+
+    // Populate time select if present in step 1
+    const timeSelect = document.getElementById('calc-time-select');
+    if (timeSelect) {
+      timeSelect.innerHTML = `
+        <option value="Сьогодні, 18:00">Сьогодні, 18:00</option>
+        <option value="Сьогодні, 18:30">Сьогодні, 18:30</option>
+        <option value="Сьогодні, 19:00">Сьогодні, 19:00</option>
+        <option value="Завтра, 10:00">Завтра, 10:00</option>
+        <option value="Завтра, 12:00">Завтра, 12:00</option>
+        <option value="Завтра, 14:00">Завтра, 14:00</option>
+        <option value="Завтра, 16:00">Завтра, 16:00</option>
+      `;
+      bookingData.date = KursoUtils.toDateInputValue(new Date());
+      bookingData.time = '18:00';
+
+      timeSelect.addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val.includes('Сьогодні')) {
+          bookingData.date = KursoUtils.toDateInputValue(new Date());
+          bookingData.time = val.replace('Сьогодні, ', '').trim();
+        } else {
+          bookingData.date = KursoUtils.toDateInputValue(KursoUtils.getTomorrowDate());
+          bookingData.time = val.replace('Завтра, ', '').trim();
+        }
+      });
+    }
 
     // Set initial amount
     const amountInput = document.getElementById('calc-from-amount');

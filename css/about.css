@@ -1,80 +1,65 @@
 /* ============================================
-   KURSO — About
+   KURSO — Benefits / Чому обирають KURSO (1:1 Match)
    ============================================ */
 
-.about-section {
-  padding: var(--space-4xl) 0;
+.benefits-section {
+  padding: 40px 0;
 }
 
-.about-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.about-intro {
-  text-align: center;
-  margin-bottom: var(--space-3xl);
-}
-
-.about-intro p {
-  font-size: var(--font-size-lg);
-  line-height: 1.8;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Principles */
-.about-principles {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg);
-  margin-bottom: var(--space-3xl);
-}
-
-.about-principle {
-  padding: var(--space-xl);
+.benefits-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  transition: all var(--transition-base);
+  padding: 24px 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
-.about-principle:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
 }
 
-.about-principle-icon {
-  width: 44px;
-  height: 44px;
+.benefit-icon {
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent-muted);
-  border-radius: var(--radius-md);
-  margin-bottom: var(--space-md);
-  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.about-principle h4 {
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  margin-bottom: var(--space-sm);
+.benefit-info {
+  display: flex;
+  flex-direction: column;
 }
 
-.about-principle p {
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-  line-height: 1.6;
+.benefit-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
 }
 
-.about-cta {
-  text-align: center;
+.benefit-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 
-@media (max-width: 767px) {
-  .about-principles {
+@media (max-width: 991px) {
+  .benefits-card {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .benefits-card {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: 18px;
   }
 }
